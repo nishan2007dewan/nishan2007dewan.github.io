@@ -1,458 +1,1787 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SafeDocs | Personal Digital Locker</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box}
 
-    <meta name="description"
-          content="Mission Website — the personal website of Nishan Dewan.">
+body{
+  margin:0;
+  background:#070707;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
 
-    <meta name="author"
-          content="Nishan Dewan">
+nav{
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 6%;
+  background:#090909;
+  border-bottom:1px solid #292929;
+}
 
-    <title>Mission Website | Nishan Dewan</title>
+.logo{
+  font-size:24px;
+  font-weight:800;
+}
 
-    <style>
+.nav{
+  display:flex;
+  gap:8px;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+.btn,
+.primary,
+.field{
+  border-radius:9px;
+  padding:11px 14px;
+}
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #050505;
-            color: white;
-            line-height: 1.6;
-        }
+.btn{
+  background:transparent;
+  color:#fff;
+  border:1px solid #444;
+  cursor:pointer;
+}
 
-        /* NAVIGATION */
+.primary{
+  background:#fff;
+  color:#000;
+  border:0;
+  font-weight:700;
+  cursor:pointer;
+}
 
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 18px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(5,5,5,0.85);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid #222;
-        }
+.field{
+  width:100%;
+  margin:0 0 12px;
+  background:#090909;
+  color:#fff;
+  border:1px solid #333;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
+button{
+  font:inherit;
+  cursor:pointer;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-            font-size: 14px;
-        }
+.hidden{
+  display:none!important;
+}
 
-        nav a:hover {
-            color: #aaa;
-        }
+.hero{
+  min-height:60vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:50px 20px;
+}
 
-        /* HERO */
+.hero h1{
+  font-size:clamp(55px,10vw,105px);
+  margin:0 0 15px;
+}
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 100px 20px;
-        }
+.hero h2{
+  font-weight:400;
+}
 
-        .hero h1 {
-            font-size: clamp(50px, 10vw, 100px);
-            letter-spacing: 8px;
-        }
+.hero p,
+.muted{
+  color:#888;
+  line-height:1.6;
+}
 
-        .hero h2 {
-            margin-top: 10px;
-            color: #aaa;
-            font-weight: normal;
-        }
+.section{
+  padding:60px 6%;
+  border-top:1px solid #222;
+}
 
-        .hero p {
-            max-width: 600px;
-            margin: 25px auto;
-            color: #888;
-        }
+.title{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:35px;
+}
 
-        .button {
-            display: inline-block;
-            padding: 13px 28px;
-            border: 1px solid white;
-            border-radius: 30px;
-            color: white;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
 
-        .button:hover {
-            background: white;
-            color: black;
-        }
+.card{
+  background:#111;
+  border:1px solid #2c2c2c;
+  border-radius:16px;
+  padding:24px;
+}
 
-        /* SECTIONS */
+.folder{
+  cursor:pointer;
+}
 
-        section {
-            padding: 100px 8%;
-            max-width: 1200px;
-            margin: auto;
-        }
+.folder:hover{
+  border-color:#777;
+  transform:translateY(-2px);
+}
 
-        section h2 {
-            font-size: 38px;
-            margin-bottom: 30px;
-        }
+.icon{
+  font-size:40px;
+  margin-bottom:12px;
+}
 
-        .line {
-            width: 60px;
-            height: 3px;
-            background: white;
-            margin-bottom: 30px;
-        }
+.auth,
+.page{
+  min-height:70vh;
+  padding:40px 6%;
+}
 
-        .text {
-            color: #aaa;
-            max-width: 800px;
-        }
+.authbox{
+  max-width:430px;
+  margin:50px auto;
+  background:#111;
+  border:1px solid #333;
+  border-radius:18px;
+  padding:30px;
+}
 
-        /* CARDS */
+.authbox .primary{
+  width:100%;
+}
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
+.toolbar{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
 
-        .card {
-            padding: 30px;
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 15px;
-            transition: 0.3s;
-        }
+.search{
+  flex:1;
+  min-width:220px;
+}
 
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: #555;
-        }
+.doc-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
 
-        .card h3 {
-            margin-bottom: 10px;
-        }
+.small{
+  padding:9px 12px;
+  border-radius:8px;
+  border:1px solid #444;
+  background:#222;
+  color:#fff;
+  text-decoration:none;
+}
 
-        .card p {
-            color: #888;
-        }
+.small:hover{
+  background:#fff;
+  color:#000;
+}
 
-        /* CONTACT */
+.empty{
+  text-align:center;
+  padding:55px;
+  border:1px dashed #444;
+  border-radius:16px;
+  color:#777;
+  grid-column:1/-1;
+}
 
-        .contact {
-            text-align: center;
-        }
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#000d;
+  display:grid;
+  place-items:center;
+  padding:18px;
+}
 
-        .contact p {
-            color: #888;
-            margin-bottom: 25px;
-        }
+.modalbox{
+  width:min(480px,100%);
+  background:#111;
+  border:1px solid #444;
+  border-radius:18px;
+  padding:28px;
+}
 
-        /* FOOTER */
+.modalactions{
+  display:flex;
+  gap:10px;
+}
 
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid #222;
-            color: #666;
-        }
+.modalactions>*{
+  flex:1;
+}
 
-        /* MOBILE */
+.preview{
+  width:min(1000px,100%);
+  height:90vh;
+  background:#111;
+  border-radius:16px;
+  padding:12px;
+}
 
-        @media (max-width: 700px) {
+.preview iframe,
+.preview img{
+  width:100%;
+  height:calc(100% - 50px);
+  border:0;
+  object-fit:contain;
+}
 
-            nav {
-                padding: 15px 20px;
-            }
+footer{
+  text-align:center;
+  color:#666;
+  border-top:1px solid #222;
+  padding:30px;
+}
 
-            nav .links {
-                display: none;
-            }
+@media(max-width:650px){
 
-            section {
-                padding: 80px 25px;
-            }
+  nav{
+    padding:14px 18px;
+  }
 
-            .hero h1 {
-                letter-spacing: 4px;
-            }
+  .logo{
+    font-size:19px;
+  }
 
-        }
+  .nav button{
+    font-size:11px;
+    padding:8px;
+  }
 
-    </style>
+  .page{
+    padding:30px 18px;
+  }
+
+}
+</style>
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
+<!-- NAVIGATION -->
 
-    <nav>
+<nav>
 
-        <div class="logo">
-            MISSION
-        </div>
+<div class="logo">
+🔐 SafeDocs
+</div>
 
-        <div class="links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </div>
+<div class="nav">
 
-    </nav>
+<button class="btn" onclick="home()">
+Home
+</button>
 
+<button id="loginNav" class="btn" onclick="loginPage()">
+Login
+</button>
 
-    <!-- HOME -->
+<button id="signupNav" class="btn" onclick="signupPage()">
+Create Account
+</button>
 
-    <section class="hero" id="home">
+<button id="dashNav" class="btn hidden" onclick="dashboard()">
+Dashboard
+</button>
 
-        <div>
+<button id="profileNav" class="btn hidden" onclick="profile()">
+Profile
+</button>
 
-            <h1>MISSION</h1>
+<button id="logoutNav" class="btn hidden" onclick="logout()">
+Logout
+</button>
 
-            <h2>Personal Website</h2>
+</div>
 
-            <p>
-                Welcome to my personal website.
-                This is my digital space where I share
-                my journey, skills, projects and interests.
-            </p>
+</nav>
 
-            <a href="#about" class="button">
-                Explore
-            </a>
 
-        </div>
+<!-- HOME -->
 
-    </section>
+<section id="home">
 
+<div class="hero">
 
-    <!-- ABOUT -->
+<div>
 
-    <section id="about">
+<h1>SafeDocs</h1>
 
-        <h2>About Me</h2>
+<h2>
+Your Personal Digital Locker
+</h2>
 
-        <div class="line"></div>
+<p>
+Store, organize and manage your important documents in one place.
+</p>
 
-        <p class="text">
+<button class="primary" onclick="signupPage()">
+Create Your Locker
+</button>
 
-            Hello! I'm <strong>Nishan Dewan</strong>.
+</div>
 
-            <br><br>
+</div>
 
-            Welcome to Mission Website — my personal
-            space on the internet.
 
-            <br><br>
+<div class="section">
 
-            This website is where I will share information
-            about myself, my education, skills, projects,
-            interests and future goals.
+<h2 class="title">
+Everything In One Place
+</h2>
 
-        </p>
+<div class="grid" id="features"></div>
 
-    </section>
+</div>
 
+</section>
 
-    <!-- EDUCATION -->
 
-    <section id="education">
+<!-- LOGIN -->
 
-        <h2>Education</h2>
+<section id="login" class="auth hidden">
 
-        <div class="line"></div>
+<div class="authbox">
 
-        <div class="cards">
+<h2>
+Welcome Back
+</h2>
 
-            <div class="card">
+<p class="muted">
+Login to your SafeDocs locker.
+</p>
 
-                <h3>School</h3>
+<input
+id="le"
+class="field"
+type="email"
+placeholder="Email address"
+>
 
-                <p>
-                    Add your school information here.
-                </p>
+<input
+id="lp"
+class="field"
+type="password"
+placeholder="Password"
+>
+
+<button class="primary" onclick="login()">
+Login
+</button>
+
+<p
+class="muted"
+style="text-align:center;cursor:pointer"
+onclick="signupPage()"
+>
+Don't have an account?
+<b style="color:#fff">
+Create Account
+</b>
+</p>
+
+</div>
+
+</section>
+
 
-            </div>
+<!-- CREATE ACCOUNT -->
 
-            <div class="card">
+<section id="signup" class="auth hidden">
 
-                <h3>Academic Journey</h3>
+<div class="authbox">
 
-                <p>
-                    Add your academic information here.
-                </p>
+<h2>
+Create Account
+</h2>
 
-            </div>
+<p class="muted">
+Create your personal SafeDocs locker.
+</p>
 
-        </div>
+<input
+id="sn"
+class="field"
+placeholder="Full name"
+>
 
-    </section>
+<input
+id="se"
+class="field"
+type="email"
+placeholder="Email address"
+>
 
+<input
+id="sp"
+class="field"
+type="password"
+placeholder="Create password"
+>
 
-    <!-- SKILLS -->
+<input
+id="sc"
+class="field"
+type="password"
+placeholder="Confirm password"
+>
 
-    <section id="skills">
+<button
+class="primary"
+onclick="createAccount()"
+>
+Create Account
+</button>
 
-        <h2>Skills</h2>
+<p
+class="muted"
+style="text-align:center;cursor:pointer"
+onclick="loginPage()"
+>
+Already have an account?
+<b style="color:#fff">
+Login
+</b>
+</p>
 
-        <div class="line"></div>
+</div>
 
-        <div class="cards">
+</section>
 
-            <div class="card">
-                <h3>Programming</h3>
-                <p>Python • HTML • CSS • JavaScript</p>
-            </div>
 
-            <div class="card">
-                <h3>Technology</h3>
-                <p>Technology and computer skills.</p>
-            </div>
+<!-- DASHBOARD -->
 
-            <div class="card">
-                <h3>Creative</h3>
-                <p>Design, editing and creative projects.</p>
-            </div>
+<section id="dash" class="page hidden">
 
-        </div>
+<h1>
+My SafeDocs Locker 🔐
+</h1>
 
-    </section>
+<p id="welcome" class="muted"></p>
 
+<div class="toolbar">
 
-    <!-- PROJECTS -->
+<input
+id="search"
+class="field search"
+placeholder="Search documents..."
+oninput="renderDash()"
+>
 
-    <section id="projects">
+<button
+class="btn"
+onclick="profile()"
+>
+Profile
+</button>
 
-        <h2>Projects</h2>
+</div>
 
-        <div class="line"></div>
+<div id="folders" class="grid"></div>
 
-        <div class="cards">
+</section>
 
-            <div class="card">
 
-                <h3>Project 01</h3>
+<!-- FOLDER -->
 
-                <p>
-                    Your first project description.
-                </p>
+<section id="folder" class="page hidden">
 
-            </div>
+<div class="toolbar">
 
-            <div class="card">
+<button
+class="btn"
+onclick="dashboard()"
+>
+← Back
+</button>
 
-                <h3>Project 02</h3>
+<h1 id="folderTitle"></h1>
 
-                <p>
-                    Your second project description.
-                </p>
+</div>
 
-            </div>
 
-            <div class="card">
+<div class="toolbar">
 
-                <h3>Project 03</h3>
+<input
+id="folderSearch"
+class="field search"
+placeholder="Search this folder..."
+oninput="renderFolder()"
+>
 
-                <p>
-                    Your third project description.
-                </p>
+<button
+class="primary"
+onclick="upload()"
+>
++ Add Document
+</button>
 
-            </div>
+</div>
 
-        </div>
 
-    </section>
+<div id="docs" class="grid"></div>
 
+</section>
 
-    <!-- INTERESTS -->
 
-    <section id="interests">
+<!-- PROFILE -->
 
-        <h2>Interests</h2>
+<section id="prof" class="page hidden">
 
-        <div class="line"></div>
+<div
+class="card"
+style="max-width:650px;margin:auto"
+>
 
-        <div class="cards">
+<h1>
+Profile
+</h1>
 
-            <div class="card">
-                <h3>Technology</h3>
-                <p>Exploring technology and computers.</p>
-            </div>
+<p class="muted">
+Account information and document statistics.
+</p>
 
-            <div class="card">
-                <h3>Fitness</h3>
-                <p>Fitness and personal development.</p>
-            </div>
+<p>
+<b>Name:</b>
+<span id="pn"></span>
+</p>
 
-            <div class="card">
-                <h3>Creativity</h3>
-                <p>Design, photography and creative work.</p>
-            </div>
+<p>
+<b>Email:</b>
+<span id="pe"></span>
+</p>
 
-        </div>
+<p>
+<b>Documents:</b>
+<span id="pc"></span>
+</p>
 
-    </section>
+<button
+class="btn"
+onclick="dashboard()"
+>
+← Dashboard
+</button>
 
+</div>
 
-    <!-- CONTACT -->
+</section>
 
-    <section id="contact" class="contact">
 
-        <h2>Contact</h2>
+<!-- FOOTER -->
 
-        <div class="line" style="margin: auto auto 30px;"></div>
+<footer>
+© 2026 SafeDocs · Created by Nishan Dewan
+</footer>
 
-        <p>
-            Want to get in touch?
-        </p>
 
-        <a href="mailto:your@email.com" class="button">
-            Contact Me
-        </a>
+<!-- MODAL -->
 
-    </section>
+<div id="modal"></div>
 
 
-    <!-- FOOTER -->
+<script>
 
-    <footer>
+/* =========================
+   SAFE DOCS DATA
+========================= */
 
-        <p>
-            © 2026 Mission Website
-        </p>
+const F = [
 
-        <p>
-            Created by Nishan Dewan
-        </p>
+["Identity","🪪","Identity and personal documents"],
 
-    </footer>
+["Education","🎓","Certificates and academic records"],
 
+["Career","💼","Professional documents"],
+
+["Finance","🏦","Financial documents"],
+
+["Medical","🏥","Medical and health records"],
+
+["Property","🏠","Property and housing documents"],
+
+["Vehicle","🚗","Vehicle-related documents"],
+
+["Other Documents","📂","Other important documents"]
+
+];
+
+
+let db;
+let user;
+let folder;
+let urls = [];
+
+
+/* =========================
+   SHORT FUNCTIONS
+========================= */
+
+const $ = id => document.getElementById(id);
+
+
+function hide(){
+
+[
+"home",
+"login",
+"signup",
+"dash",
+"folder",
+"prof"
+
+].forEach(x => {
+
+$(x).classList.add("hidden");
+
+});
+
+}
+
+
+function esc(s){
+
+let d = document.createElement("div");
+
+d.textContent = s;
+
+return d.innerHTML;
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function nav(){
+
+let loggedIn = !!user;
+
+[
+"dashNav",
+"profileNav",
+"logoutNav"
+
+].forEach(i => {
+
+$(i).classList.toggle(
+"hidden",
+!loggedIn
+);
+
+});
+
+
+[
+"loginNav",
+"signupNav"
+
+].forEach(i => {
+
+$(i).classList.toggle(
+"hidden",
+loggedIn
+);
+
+});
+
+}
+
+
+function home(){
+
+hide();
+
+$("home").classList.remove("hidden");
+
+nav();
+
+}
+
+
+function loginPage(){
+
+if(user){
+
+dashboard();
+
+return;
+
+}
+
+hide();
+
+$("login").classList.remove("hidden");
+
+nav();
+
+}
+
+
+function signupPage(){
+
+if(user){
+
+dashboard();
+
+return;
+
+}
+
+hide();
+
+$("signup").classList.remove("hidden");
+
+nav();
+
+}
+
+
+function dashboard(){
+
+if(!user){
+
+loginPage();
+
+return;
+
+}
+
+hide();
+
+$("dash").classList.remove("hidden");
+
+$("welcome").textContent =
+"Welcome, " + user.name + ".";
+
+nav();
+
+renderDash();
+
+}
+
+
+function profile(){
+
+if(!user){
+
+loginPage();
+
+return;
+
+}
+
+hide();
+
+$("prof").classList.remove("hidden");
+
+$("pn").textContent = user.name;
+
+$("pe").textContent = user.email;
+
+allDocs().then(d => {
+
+$("pc").textContent = d.length;
+
+});
+
+nav();
+
+}
+
+
+function logout(){
+
+user = null;
+
+sessionStorage.removeItem(
+"safedocsUser"
+);
+
+home();
+
+}
+
+
+/* =========================
+   INDEXED DB
+========================= */
+
+function openDB(){
+
+return new Promise((resolve,reject)=>{
+
+let request =
+indexedDB.open("SafeDocsDB",1);
+
+
+request.onupgradeneeded = e => {
+
+let database =
+e.target.result;
+
+
+if(
+!database.objectStoreNames.contains("users")
+){
+
+database.createObjectStore(
+"users",
+{
+keyPath:"email"
+}
+);
+
+}
+
+
+if(
+!database.objectStoreNames.contains("docs")
+){
+
+let store =
+database.createObjectStore(
+"docs",
+{
+keyPath:"id",
+autoIncrement:true
+}
+);
+
+store.createIndex(
+"user",
+"user"
+);
+
+}
+
+};
+
+
+request.onsuccess = e => {
+
+db = e.target.result;
+
+resolve();
+
+};
+
+
+request.onerror = () => {
+
+reject(request.error);
+
+};
+
+});
+
+}
+
+
+/* =========================
+   DATABASE HELPERS
+========================= */
+
+function getUser(email){
+
+return new Promise((resolve,reject)=>{
+
+let request =
+db
+.transaction("users")
+.objectStore("users")
+.get(email);
+
+request.onsuccess = () => {
+
+resolve(request.result);
+
+};
+
+request.onerror = () => {
+
+reject(request.error);
+
+};
+
+});
+
+}
+
+
+function add(store,obj){
+
+return new Promise((resolve,reject)=>{
+
+let request =
+db
+.transaction(store,"readwrite")
+.objectStore(store)
+.add(obj);
+
+request.onsuccess = () => {
+
+resolve(request.result);
+
+};
+
+request.onerror = () => {
+
+reject(request.error);
+
+};
+
+});
+
+}
+
+
+function put(store,obj){
+
+return new Promise((resolve,reject)=>{
+
+let request =
+db
+.transaction(store,"readwrite")
+.objectStore(store)
+.put(obj);
+
+request.onsuccess = () => {
+
+resolve();
+
+};
+
+request.onerror = () => {
+
+reject(request.error);
+
+};
+
+});
+
+}
+
+
+function del(store,id){
+
+return new Promise((resolve,reject)=>{
+
+let request =
+db
+.transaction(store,"readwrite")
+.objectStore(store)
+.delete(id);
+
+request.onsuccess = () => {
+
+resolve();
+
+};
+
+request.onerror = () => {
+
+reject(request.error);
+
+};
+
+});
+
+}
+
+
+function allDocs(){
+
+return new Promise((resolve,reject)=>{
+
+let request =
+db
+.transaction("docs")
+.objectStore("docs")
+.getAll();
+
+request.onsuccess = () => {
+
+resolve(
+request.result.filter(
+x => x.user === user.email
+)
+);
+
+};
+
+request.onerror = () => {
+
+reject(request.error);
+
+};
+
+});
+
+}
+
+
+/* =========================
+   CREATE ACCOUNT
+========================= */
+
+async function createAccount(){
+
+let n =
+$("sn").value.trim();
+
+let e =
+$("se").value.trim().toLowerCase();
+
+let p =
+$("sp").value;
+
+let c =
+$("sc").value;
+
+
+if(!n || !e || !p){
+
+alert(
+"Please complete all fields."
+);
+
+return;
+
+}
+
+
+if(p.length < 6){
+
+alert(
+"Password must be at least 6 characters."
+);
+
+return;
+
+}
+
+
+if(p !== c){
+
+alert(
+"Passwords do not match."
+);
+
+return;
+
+}
+
+
+if(await getUser(e)){
+
+alert(
+"Account already exists."
+);
+
+return;
+
+}
+
+
+await add(
+"users",
+{
+name:n,
+email:e,
+password:p
+}
+);
+
+
+user = {
+
+name:n,
+email:e
+
+};
+
+
+sessionStorage.setItem(
+"safedocsUser",
+e
+);
+
+
+dashboard();
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function login(){
+
+let e =
+$("le").value
+.trim()
+.toLowerCase();
+
+let p =
+$("lp").value;
+
+
+let u =
+await getUser(e);
+
+
+if(!u || u.password !== p){
+
+alert(
+"Invalid email or password."
+);
+
+return;
+
+}
+
+
+user = {
+
+name:u.name,
+email:u.email
+
+};
+
+
+sessionStorage.setItem(
+"safedocsUser",
+e
+);
+
+
+dashboard();
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+async function renderDash(){
+
+let d =
+await allDocs();
+
+
+let q =
+($("search").value || "")
+.toLowerCase();
+
+
+$("folders").innerHTML = "";
+
+
+F.forEach(
+([n,ic,desc]) => {
+
+let count =
+d.filter(x =>
+
+x.folder === n &&
+
+(
+x.name +
+" " +
+x.fileName
+)
+.toLowerCase()
+.includes(q)
+
+).length;
+
+
+let c =
+document.createElement("div");
+
+
+c.className =
+"card folder";
+
+
+c.onclick =
+() => openFolder(n);
+
+
+c.innerHTML = `
+
+<div class="icon">
+${ic}
+</div>
+
+<h3>
+${n}
+</h3>
+
+<p class="muted">
+${desc}
+</p>
+
+<p class="muted">
+${count}
+document${count == 1 ? "" : "s"}
+</p>
+
+`;
+
+
+$("folders").appendChild(c);
+
+});
+
+}
+
+
+/* =========================
+   OPEN FOLDER
+========================= */
+
+async function openFolder(n){
+
+folder = n;
+
+hide();
+
+$("folder")
+.classList.remove("hidden");
+
+$("folderTitle")
+.textContent =
+n + " Documents";
+
+nav();
+
+renderFolder();
+
+}
+
+
+/* =========================
+   RENDER DOCUMENTS
+========================= */
+
+async function renderFolder(){
+
+urls.forEach(
+URL.revokeObjectURL
+);
+
+urls = [];
+
+
+let d =
+(await allDocs())
+.filter(
+x => x.folder === folder
+);
+
+
+let q =
+($("folderSearch").value || "")
+.toLowerCase();
+
+
+d =
+d.filter(x =>
+
+(
+x.name +
+" " +
+x.fileName
+)
+.toLowerCase()
+.includes(q)
+
+);
+
+
+$("docs").innerHTML = "";
+
+
+if(!d.length){
+
+$("docs").innerHTML = `
+
+<div class="empty">
+
+📂
+
+<br>
+
+<b style="color:#fff">
+No documents
+</b>
+
+<br>
+
+Add your first document.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+d.forEach(x => {
+
+let u =
+URL.createObjectURL(x.file);
+
+urls.push(u);
+
+
+let c =
+document.createElement("div");
+
+
+c.className = "card";
+
+
+c.innerHTML = `
+
+<div class="icon">
+📄
+</div>
+
+<h3>
+${esc(x.name)}
+</h3>
+
+<p class="muted">
+${esc(x.fileName)}
+</p>
+
+<p class="muted">
+${(x.file.size / 1024).toFixed(1)}
+KB
+</p>
+
+<div class="doc-actions">
+
+<button
+class="small"
+data-v
+>
+👁 View
+</button>
+
+<a
+class="small"
+href="${u}"
+download="${esc(x.fileName)}"
+>
+⬇️ Download
+</a>
+
+<button
+class="small"
+data-f
+>
+${x.favorite
+? "★ Unfavorite"
+: "☆ Favorite"}
+</button>
+
+<button
+class="small"
+data-d
+>
+🗑 Delete
+</button>
+
+</div>
+
+`;
+
+
+c.querySelector("[data-v]")
+.onclick =
+() => view(x,u);
+
+
+c.querySelector("[data-f]")
+.onclick =
+async () => {
+
+x.favorite =
+!x.favorite;
+
+await put("docs",x);
+
+renderFolder();
+
+};
+
+
+c.querySelector("[data-d]")
+.onclick =
+async () => {
+
+if(
+confirm(
+"Delete this document?"
+)
+){
+
+await del(
+"docs",
+x.id
+);
+
+renderFolder();
+
+}
+
+};
+
+
+$("docs")
+.appendChild(c);
+
+});
+
+}
+
+
+/* =========================
+   UPLOAD MODAL
+========================= */
+
+function upload(){
+
+$("modal").innerHTML = `
+
+<div class="modal">
+
+<div class="modalbox">
+
+<h2>
+Add Document
+</h2>
+
+<p class="muted">
+Upload to ${esc(folder)}.
+</p>
+
+<input
+id="dn"
+class="field"
+placeholder="Document name"
+>
+
+<input
+id="df"
+class="field"
+type="file"
+>
+
+<div class="modalactions">
+
+<button
+class="btn"
+onclick="closeModal()"
+>
+Cancel
+</button>
+
+<button
+class="primary"
+onclick="saveDoc()"
+>
+Upload
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   SAVE DOCUMENT
+========================= */
+
+async function saveDoc(){
+
+let n =
+$("dn").value.trim();
+
+let f =
+$("df").files[0];
+
+
+if(!n || !f){
+
+alert(
+"Enter a name and choose a file."
+);
+
+return;
+
+}
+
+
+if(
+f.size > 25 * 1024 * 1024
+){
+
+alert(
+"Maximum file size is 25 MB."
+);
+
+return;
+
+}
+
+
+await add(
+"docs",
+{
+user:user.email,
+folder:folder,
+name:n,
+file:f,
+fileName:f.name,
+favorite:false,
+createdAt:Date.now()
+}
+);
+
+
+closeModal();
+
+renderFolder();
+
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeModal(){
+
+$("modal").innerHTML = "";
+
+}
+
+
+/* =========================
+   VIEW DOCUMENT
+========================= */
+
+function view(x,u){
+
+let body;
+
+
+if(
+x.file.type.startsWith("image/")
+){
+
+body = `
+
+<img src="${u}">
+
+`;
+
+}
+
+
+else if(
+x.file.type ===
+"application/pdf"
+){
+
+body = `
+
+<iframe
+src="${u}"
+>
+</iframe>
+
+`;
+
+}
+
+
+else{
+
+body = `
+
+<div
+style="
+padding:40px;
+text-align:center
+"
+>
+
+Preview unavailable.
+
+<br><br>
+
+<a
+class="small"
+href="${u}"
+download="${esc(x.fileName)}"
+>
+Download file
+</a>
+
+</div>
+
+`;
+
+}
+
+
+$("modal").innerHTML = `
+
+<div class="modal">
+
+<div class="preview">
+
+<div
+style="
+display:flex;
+justify-content:space-between;
+padding:8px
+"
+>
+
+<b>
+${esc(x.name)}
+</b>
+
+<button
+class="btn"
+onclick="closeModal()"
+>
+Close
+</button>
+
+</div>
+
+${body}
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   HOME FEATURES
+========================= */
+
+$("features").innerHTML =
+
+F.map(x => `
+
+<div class="card">
+
+<div class="icon">
+${x[1]}
+</div>
+
+<h3>
+${x[0]}
+</h3>
+
+<p class="muted">
+${x[2]}
+</p>
+
+</div>
+
+`).join("");
+
+
+/* =========================
+   START SAFE DOCS
+========================= */
+
+(async()=>{
+
+await openDB();
+
+
+let e =
+sessionStorage.getItem(
+"safedocsUser"
+);
+
+
+if(e){
+
+let u =
+await getUser(e);
+
+
+if(u){
+
+user = {
+
+name:u.name,
+email:u.email
+
+};
+
+}
+
+}
+
+
+if(user){
+
+dashboard();
+
+}
+
+else{
+
+home();
+
+}
+
+})();
+
+</script>
 
 </body>
 </html>
